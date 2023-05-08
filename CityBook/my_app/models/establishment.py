@@ -36,8 +36,8 @@ class Establishment(models.Model):
 
     class Meta:
         ordering = ['update_time']
-        verbose_name = "Учреждение"
-        verbose_name_plural = "Учреждения"
+        verbose_name = "Заведение"
+        verbose_name_plural = "Заведении"
 
     def __str__(self) -> models.CharField:
         return self.title
