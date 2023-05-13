@@ -1,14 +1,19 @@
-from rest_framework import generics
-from django.shortcuts import render, get_object_or_404
+from rest_framework import generics, mixins
+from rest_framework.viewsets import GenericViewSet
+
 from .models import Establishment
 from .serializers import EstablishmentsSerializers, EstablishmentsInfoSerializers
 
 
-class EstablishmentsAPIList(generics.ListCreateAPIView):
-    queryset = Establishment.objects.all()
-    serializer_class = EstablishmentsSerializers
-
-
-class EstablishmentsAPIInfo(generics.ListCreateAPIView):
+class EstablishmentsViewSet(mixins.CreateModelMixin,
+                            mixins.RetrieveModelMixin,
+                            mixins.UpdateModelMixin,
+                            mixins.DestroyModelMixin,
+                            GenericViewSet):
     queryset = Establishment.objects.all()
     serializer_class = EstablishmentsInfoSerializers
+
+
+class EstablishmentsAPIList(generics.ListAPIView):
+    queryset = Establishment.objects.all()
+    serializer_class = EstablishmentsSerializers

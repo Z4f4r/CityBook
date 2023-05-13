@@ -1,8 +1,13 @@
-from django.urls import path
-from .views import EstablishmentsAPIList, EstablishmentsAPIInfo
+from django.urls import path, include
+from .views import EstablishmentsViewSet, EstablishmentsAPIList
+from rest_framework import routers
+
+
+router = routers.SimpleRouter()
+router.register(r'establishments', EstablishmentsViewSet)
 
 
 urlpatterns = [
-    path('establishmentslist/', EstablishmentsAPIList.as_view()),
-    path('establishmentsinfo/', EstablishmentsAPIInfo.as_view())
+    path('v1/', include(router.urls)),
+    path('v1/establishmentslist/', EstablishmentsAPIList.as_view())
 ]
